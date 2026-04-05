@@ -1,0 +1,384 @@
+/* ── Sanctum Design System ── */
+
+:root {
+  --bg-deep: #0a0a0f;
+  --bg-surface: rgba(255, 255, 255, 0.03);
+  --bg-surface-hover: rgba(255, 255, 255, 0.05);
+  --text-primary: rgba(255, 255, 255, 0.85);
+  --text-secondary: rgba(255, 255, 255, 0.5);
+  --text-tertiary: rgba(255, 255, 255, 0.3);
+  --gold: #c4a265;
+  --gold-dim: rgba(196, 162, 101, 0.4);
+  --teal: #2a6b6b;
+  --teal-dim: rgba(42, 107, 107, 0.3);
+  --violet: #6b5b8a;
+  --violet-dim: rgba(107, 91, 138, 0.3);
+  --border: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text-primary);
+  background: var(--bg-deep);
+  overflow-x: hidden;
+}
+
+/* ── Background Canvas ── */
+
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+#bg-canvas canvas {
+  display: block;
+}
+
+/* ── Content Layer ── */
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Sections ── */
+
+section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 2rem;
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+
+.section-inner {
+  max-width: 720px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 3rem;
+  border-radius: 8px;
+}
+
+/* ── Scroll Fade ── */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Opening Field ── */
+
+.opening {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.wordmark {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.tagline {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
+  font-family: var(--font-sans);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+}
+
+/* ── Experience Section ── */
+
+.experience h2,
+.products h2,
+.science h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.experience p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Products Section ── */
+
+.products .section-inner {
+  max-width: 900px;
+}
+
+.product-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.product-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2.5rem 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.product-card:hover {
+  background: rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.product-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3em 0.8em;
+  border-radius: 3px;
+  margin-bottom: 1.25rem;
+  background: var(--teal-dim);
+  color: var(--teal);
+  border: 1px solid rgba(42, 107, 107, 0.2);
+}
+
+.badge.waitlist {
+  background: var(--violet-dim);
+  color: var(--violet);
+  border-color: rgba(107, 91, 138, 0.2);
+}
+
+.product-card p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+/* ── Email Form ── */
+
+.email-form {
+  display: flex;
+  gap: 0;
+  width: 100%;
+}
+
+.email-form input[type="email"] {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.email-form input[type="email"]::placeholder {
+  color: var(--text-tertiary);
+}
+
+.email-form input[type="email"]:focus {
+  border-color: var(--gold-dim);
+}
+
+.email-form button {
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: rgba(196, 162, 101, 0.12);
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.3s ease;
+}
+
+.email-form button:hover {
+  background: rgba(196, 162, 101, 0.2);
+}
+
+/* ── Science Section ── */
+
+.science p {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.science a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold-dim);
+  transition: border-color 0.3s ease;
+}
+
+.science a:hover {
+  border-color: var(--gold);
+}
+
+/* ── Footer ── */
+
+footer {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+footer a {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--text-secondary);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 680px) {
+  body {
+    font-size: 16px;
+  }
+
+  section {
+    padding: 2rem 1rem;
+    overflow-y: auto;
+  }
+
+  .section-inner {
+    padding: 1.5rem 1.25rem;
+    max-width: 100%;
+  }
+
+  .wordmark {
+    letter-spacing: 0.15em;
+  }
+
+  .product-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .product-card {
+    padding: 1.25rem;
+  }
+
+  .product-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .email-form {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .email-form input[type="email"] {
+    border-right: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  .email-form button {
+    border-radius: 4px;
+  }
+
+  .experience h2,
+  .products h2,
+  .science h2 {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+    margin-bottom: 1.25rem;
+  }
+
+  .experience p,
+  .science p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .badge {
+    margin-bottom: 0.75rem;
+  }
+
+  footer {
+    padding: 1.5rem 1rem;
+  }
+}

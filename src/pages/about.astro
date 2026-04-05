@@ -1,0 +1,186 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="The Research — Sanctum"
+  description="The scientific foundations behind Sanctum: Attention Restoration Theory, neuroaesthetics, and sensorimotor regulation."
+  ogTitle="The Research — Sanctum"
+  ogDescription="How generative art restores attention, grounded in neuroscience."
+>
+  <div class="about-page">
+    <div class="container">
+      <a href="/" class="back-link">&larr; Back to Sanctum</a>
+
+      <h1>The Research</h1>
+      <p class="subtitle">How generative art restores attention</p>
+
+      <p>
+        Sanctum is informed by a growing body of research across neuroscience, psychology, and aesthetics. The generative systems are not decorative — they are designed to produce specific cognitive and emotional effects grounded in peer-reviewed science.
+      </p>
+
+      <h2>Attention Restoration Theory</h2>
+      <p>
+        Developed by Rachel and Stephen Kaplan, ART proposes that directed attention is a finite resource that becomes depleted through sustained use. Restoration occurs through exposure to environments that evoke <em>soft fascination</em> — effortless, aesthetically engaging attention that allows the executive system to rest. Sanctum's generative environments are specifically tuned to produce this quality: complex enough to hold interest, gentle enough to avoid demand.
+      </p>
+
+      <h2>Neuroaesthetics</h2>
+      <p>
+        Research by Semir Zeki, Anjan Chatterjee, and Edward Vessel has shown that aesthetic experience activates the default mode network — the same neural circuitry involved in self-reflection, emotional processing, and mental rest. Encounters with beauty are not passive; they actively reorganize attentional and affective states. Sanctum's visual language draws on the mathematical structures (symmetry, harmonic ratio, fractal self-similarity) that neuroaesthetic research identifies as reliably moving.
+      </p>
+
+      <h2>Sensorimotor Regulation</h2>
+      <p>
+        Touch-based interaction with evolving visual patterns engages sensorimotor feedback loops associated with emotional regulation. Research by McGlone, Sandoz, and others shows that gentle, rhythmic sensory engagement can modulate autonomic arousal — reducing heart rate, lowering cortisol, and shifting the nervous system toward a parasympathetic state. Sanctum's interactive layer is designed with this in mind.
+      </p>
+
+      <h2>Flow and the Free Energy Principle</h2>
+      <p>
+        Sanctum's generative systems operate at the edge of predictability — structured enough to be graspable, complex enough to remain surprising. This balance maps onto Karl Friston's Free Energy Principle and Csikszentmihalyi's concept of flow: states where the mind is neither bored nor overwhelmed, and where the boundary between observer and environment softens. This is the felt quality we are designing for.
+      </p>
+
+      <hr />
+
+      <h2>Clinical Validation</h2>
+      <p>
+        We are currently in conversation with neuroscience researchers to launch a Randomized Controlled Trial testing Sanctum's effects on stress, attention, and mood. This study will compare generative art environments against standard digital feeds, contributing to the emerging field of experience-based digital medicine.
+      </p>
+
+      <h2>Collaborate</h2>
+      <p>
+        We are seeking aligned partners across neuroscience, psychology, generative art, and contemplative practice. If you work at the intersection of aesthetics and wellbeing, we'd welcome a conversation.
+      </p>
+
+      <ul>
+        <li>Neuroscience and psychology researchers</li>
+        <li>Generative artists and creative technologists</li>
+        <li>Foundations and research funders</li>
+        <li>Mental health and wellness practitioners</li>
+      </ul>
+
+      <div class="contact">
+        <a href="mailto:clay@sanctum.art">clay@sanctum.art</a>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .about-page {
+    padding: 4rem 2rem 6rem;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    margin-bottom: 4rem;
+    transition: color 0.3s ease;
+  }
+
+  .back-link:hover {
+    color: var(--text-secondary);
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 3.5rem;
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-top: 3.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+  }
+
+  p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  li {
+    padding-left: 1.2rem;
+    position: relative;
+    color: var(--text-secondary);
+    margin-bottom: 0.6rem;
+    font-size: 1.05rem;
+  }
+
+  li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.75em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+  }
+
+  a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold-dim);
+    transition: border-color 0.3s ease;
+  }
+
+  a:hover {
+    border-color: var(--gold);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3.5rem 0;
+  }
+
+  .contact {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    margin-top: 4rem;
+  }
+
+  .contact a {
+    color: var(--text-tertiary);
+    border-bottom-color: transparent;
+  }
+
+  .contact a:hover {
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 600px) {
+    .about-page {
+      padding: 2rem 1.5rem 4rem;
+      font-size: 16px;
+    }
+  }
+</style>
