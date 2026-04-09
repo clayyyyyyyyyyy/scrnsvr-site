@@ -35,16 +35,21 @@ body {
   overflow-x: hidden;
 }
 
-/* ── Canvas ── */
+/* ── Canvas — masked to right 60% on desktop ── */
 
 #bg-canvas {
   position: fixed;
   inset: 0;
   z-index: -1;
+  -webkit-mask-image: linear-gradient(to right, transparent 32%, rgba(0,0,0,0.3) 40%, black 55%);
+  mask-image: linear-gradient(to right, transparent 32%, rgba(0,0,0,0.3) 40%, black 55%);
 }
 
 #bg-canvas canvas {
   display: block;
+  /* Shift canvas so art centers within the visible right 60% */
+  position: relative;
+  left: 20%;
 }
 
 .content {
@@ -81,21 +86,7 @@ section {
   position: relative;
 }
 
-/* Left-biased vignette: dark left, transparent right */
-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(5, 5, 8, 0.94) 0%,
-    rgba(5, 5, 8, 0.88) 25%,
-    rgba(5, 5, 8, 0.5) 50%,
-    rgba(5, 5, 8, 0.15) 70%,
-    transparent 85%
-  );
-  pointer-events: none;
-}
+/* No section vignette needed — canvas is constrained to right 60% with its own gradient edge */
 
 .section-text {
   position: relative;
@@ -113,10 +104,6 @@ section::before {
   align-content: center;
   align-items: end;
   padding: 0;
-}
-
-.opening::before {
-  display: none;
 }
 
 .opening-text {
@@ -137,11 +124,11 @@ section::before {
 }
 
 .wordmark-line:first-child {
-  font-size: clamp(4rem, 12vw, 10rem);
+  font-size: clamp(3rem, 7vw, 6rem);
 }
 
 .wordmark-line:last-child {
-  font-size: clamp(4rem, 12vw, 10rem);
+  font-size: clamp(3rem, 7vw, 6rem);
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -362,23 +349,23 @@ footer a:hover {
 @media (max-width: 600px) {
   body { font-size: 17px; }
 
+  /* Canvas: masked to top 50% on mobile */
+  #bg-canvas {
+    -webkit-mask-image: linear-gradient(to bottom, black 35%, rgba(0,0,0,0.3) 45%, transparent 55%);
+    mask-image: linear-gradient(to bottom, black 35%, rgba(0,0,0,0.3) 45%, transparent 55%);
+  }
+
+  #bg-canvas canvas {
+    left: 0;
+    top: -25%;
+  }
+
   /* Vertical split: art top, content bottom */
   section {
     grid-template-columns: 1fr;
-    grid-template-rows: 35vh 1fr;
+    grid-template-rows: 40vh 1fr;
     padding: 0;
     align-items: start;
-  }
-
-  section::before {
-    /* Only darken the bottom content area */
-    background: linear-gradient(
-      to top,
-      rgba(5, 5, 8, 0.96) 0%,
-      rgba(5, 5, 8, 0.95) 55%,
-      rgba(5, 5, 8, 0.5) 70%,
-      transparent 85%
-    );
   }
 
   .section-text {
