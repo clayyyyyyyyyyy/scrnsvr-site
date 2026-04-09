@@ -47,6 +47,7 @@ body {
 
 #bg-canvas canvas {
   display: block;
+  transform: translateX(20%);
 }
 
 .content {
@@ -350,6 +351,10 @@ footer a:hover {
   #bg-canvas {
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 55%);
     mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 55%);
+  }
+
+  #bg-canvas canvas {
+    transform: translateX(0) translateY(-15%);
   }
 
   /* Vertical split: art top, content bottom */
