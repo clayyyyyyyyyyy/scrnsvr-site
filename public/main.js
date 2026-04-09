@@ -16,7 +16,7 @@ function torusSketch(p) {
   p.setup = function () {
     let canvas = p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
     canvas.parent('bg-canvas');
-    p.colorMode(p.HSB, 360, 75, 75);
+    p.colorMode(p.HSB, 360, 100, 100);
     p.noStroke();
   };
 
@@ -71,7 +71,7 @@ function torusSketch(p) {
     let ly = p.cos(p.frameCount * 0.01) * 600;
     let lz = p.sin(p.frameCount * 0.01) * p.cos(p.frameCount * 0.01) * 600;
     p.pointLight(255, 255, 255, lx, ly, lz);
-    p.ambientLight(40, 40, 40);
+    p.ambientLight(80, 80, 80);
 
     p.rotateX(p.frameCount * 0.003 * touchXFactor);
     p.rotateY(p.frameCount * 0.004 * touchXFactor);
@@ -276,10 +276,10 @@ function waveSketch(p) {
         let wave = p.sin(d * waveFactor + time) * p.cos(x * waveFactor + y * waveFactor);
 
         let hue = (p.map(wave, -1, 1, 0, 360) + globalHueShift) % 360;
-        let sat = 70 + 10 * p.sin(d * 0.01 + time * 0.2);
-        let bright = 45 + 15 * wave;
+        let sat = 85 + 10 * p.sin(d * 0.01 + time * 0.2);
+        let bright = 65 + 20 * wave;
 
-        p.stroke(hue, sat, bright, 50);
+        p.stroke(hue, sat, bright, 70);
 
         let radius = p.map(wave, -1, 1, 2, 20) + 5 * p.sin(time + d * 0.01);
         p.ellipse(x, y, radius);

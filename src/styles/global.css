@@ -35,21 +35,18 @@ body {
   overflow-x: hidden;
 }
 
-/* ── Canvas — masked to right 60% on desktop ── */
+/* ── Canvas — full window, masked to show right 60% ── */
 
 #bg-canvas {
   position: fixed;
   inset: 0;
   z-index: -1;
-  -webkit-mask-image: linear-gradient(to right, transparent 32%, rgba(0,0,0,0.3) 40%, black 55%);
-  mask-image: linear-gradient(to right, transparent 32%, rgba(0,0,0,0.3) 40%, black 55%);
+  -webkit-mask-image: linear-gradient(to right, transparent 33%, black 48%);
+  mask-image: linear-gradient(to right, transparent 33%, black 48%);
 }
 
 #bg-canvas canvas {
   display: block;
-  /* Shift canvas so art centers within the visible right 60% */
-  position: relative;
-  left: 20%;
 }
 
 .content {
@@ -351,13 +348,8 @@ footer a:hover {
 
   /* Canvas: masked to top 50% on mobile */
   #bg-canvas {
-    -webkit-mask-image: linear-gradient(to bottom, black 35%, rgba(0,0,0,0.3) 45%, transparent 55%);
-    mask-image: linear-gradient(to bottom, black 35%, rgba(0,0,0,0.3) 45%, transparent 55%);
-  }
-
-  #bg-canvas canvas {
-    left: 0;
-    top: -25%;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 55%);
+    mask-image: linear-gradient(to bottom, black 0%, black 40%, transparent 55%);
   }
 
   /* Vertical split: art top, content bottom */
