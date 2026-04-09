@@ -1,7 +1,5 @@
 {
   "name": "sanctum-site",
   "compatibility_date": "2026-04-05",
-  "assets": {
-    "directory": "./dist"
-  }
+  "pages_build_output_dir": "./dist"
 }

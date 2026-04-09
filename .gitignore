@@ -12,6 +12,11 @@ dist
 .astro
 *.local
 
+# Skills (installed via npx skills add)
+.agents/
+.claude/skills/
+skills-lock.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
