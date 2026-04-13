@@ -6,7 +6,7 @@ import Base from '../layouts/Base.astro';
   description="Your screen, restored. Generative art for attention, stillness, and presence."
 >
   <div class="logo-overlay">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 928.19 963.36">
+    <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 928.19 963.36">
       <defs>
         <style>.cls-1{fill:#fbda54;}</style>
       </defs>
@@ -21,8 +21,45 @@ import Base from '../layouts/Base.astro';
       <path d="M461.84.03c88.73-1.87,124.87,94.86,161.81,159.26,71.97,125.48,144.38,250.7,216.34,376.19,24.64,42.98,54.51,87.72,75.35,132.37,35.97,77.06-6.79,145.58-88.07,157.07H101.6c-43.63-5.71-86.01-31.97-98-76.21-13.54-49.93,13.81-89.88,37.09-131.23C147.24,428.26,260.08,242.52,366.88,53.44,388.41,22.15,423.26.84,461.84.03ZM457.02,67.95c-11.31,1.45-23.82,9.03-31.38,17.44-122.15,208.15-243.59,417.37-362.34,627.44-5.38,26.75,16.84,47.4,42.14,49.87h717.04c30.46-4.05,52.49-26.77,40.15-58.41-116.56-206.1-236.35-410.41-355.75-614.89-11.94-15.16-30.28-23.96-49.85-21.45Z"/>
       <path d="M640.11,583.58c-.64,93.16-77.85,136.56-171.02,136.56s-171.02-46.58-171.02-132.73c0-7.66,4.47-12.76,11.49-13.4h50.41c8.29,0,13.4,5.1,13.4,14.04,0,26.8,22.97,59.98,95.72,59.98,64.45,0,94.44-21.7,94.44-64.45,0-37.01-29.99-59.34-95.08-65.09-89.34-7.66-163.36-34.46-163.36-125.07,0-84.87,80.4-131.45,157.62-131.45s162.08,40.84,162.08,132.73c0,7.66-4.47,14.04-11.49,14.04h-53.6c-7.02,0-11.49-6.38-11.49-14.04,0-35.1-38.29-63.17-85.51-63.17-44.03,0-81.04,28.08-81.04,61.9,0,35.74,35.1,46.58,88.7,52.33,97.63,10.21,169.74,40.2,169.74,137.83Z"/>
       <rect class="cls-1" x="297.58" y="549.17" width="90" height="141.87" transform="translate(488.44 -73.16) rotate(40.8)"/>
-      <path d="M291.46,508.08c61.12-5.2,94.28,72.21,46.59,111.68-49.94,41.33-120.96-7.7-101.22-68.67,7.61-23.52,29.96-40.91,54.63-43.01Z"/>
+      <path id="circle" d="M291.46,508.08c61.12-5.2,94.28,72.21,46.59,111.68-49.94,41.33-120.96-7.7-101.22-68.67,7.61-23.52,29.96-40.91,54.63-43.01Z"/>
       <path d="M425.52,645.46c-12.06-2.32-21.47-8.39-27.94-15.87-5.84-6.76-13.04-7.28-19.32-1.86l-38.15,32.96c-4.9,5.07-4.94,11.85.07,17.65,15.76,18.25,57.9,29.94,77.97,36.07,8.61-23.59-3.44-46.35,7.36-68.94Z"/>
     </svg>
   </div>
+
+  <div class="page-two" id="page-two"></div>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      const logo = document.getElementById('logo');
+      const overlay = document.querySelector('.logo-overlay');
+      const circle = document.getElementById('circle');
+      const pageTwo = document.getElementById('page-two');
+      let zoomed = false;
+
+      logo.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (zoomed) return;
+        zoomed = true;
+
+        const circleRect = circle.getBoundingClientRect();
+        const cx = circleRect.left + circleRect.width / 2;
+        const cy = circleRect.top + circleRect.height / 2;
+        const circleRadius = Math.max(circleRect.width, circleRect.height) / 2;
+
+        const viewDiag = Math.sqrt(
+          window.innerWidth * window.innerWidth +
+          window.innerHeight * window.innerHeight
+        );
+        const scale = (viewDiag / circleRadius) * 1.2;
+
+        overlay.style.transformOrigin = cx + 'px ' + cy + 'px';
+        overlay.style.transform = 'scale(' + scale + ')';
+
+        overlay.addEventListener('transitionend', function handler() {
+          overlay.removeEventListener('transitionend', handler);
+          pageTwo.classList.add('visible');
+        });
+      });
+    });
+  </script>
 </Base>

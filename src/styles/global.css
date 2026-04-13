@@ -28,6 +28,8 @@ main, canvas {
   justify-content: center;
   pointer-events: none;
   z-index: 1;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 .logo-overlay svg {
@@ -35,6 +37,23 @@ main, canvas {
   width: auto;
   opacity: 0;
   animation: fadeIn 1.2s ease-out 0.4s forwards;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.page-two {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.page-two.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 @keyframes fadeIn {
