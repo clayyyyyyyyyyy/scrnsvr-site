@@ -1,0 +1,45 @@
+---
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Your screen, restored." />
+    <meta property="og:title" content="scrnsvr" />
+    <meta property="og:description" content="Your screen, restored." />
+    <meta property="og:image" content="https://scrnsvr.art/preview.jpg" />
+    <meta property="og:url" content="https://scrnsvr.art/about" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>scrnsvr</title>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+      main, canvas {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw !important;
+        height: 100vh !important;
+        opacity: 0;
+        transition: opacity 1.5s ease-in;
+      }
+      main.visible, main.visible canvas {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <script is:inline src="/hearth.js"></script>
+    <script is:inline>
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.querySelector('main').classList.add('visible');
+        }, 100);
+      });
+    </script>
+  </body>
+</html>
