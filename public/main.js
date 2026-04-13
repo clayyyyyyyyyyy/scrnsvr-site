@@ -3,7 +3,7 @@
 // ── SKETCH DEFINITIONS ──
 // Each sketch renders full-screen into #bg-canvas
 
-// TORUS HYPERSTRUCTURE (identical to sanctum.art)
+// TORUS HYPERSTRUCTURE (identical to scrnsvr.art)
 function torusSketch(p) {
   let angle = 0;
   let wAngle = 0;
