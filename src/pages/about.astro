@@ -1,11 +1,16 @@
 ---
+import Base from '../layouts/Base.astro';
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0;url=/" />
-    <title>scrnsvr</title>
-  </head>
-  <body></body>
-</html>
+<Base
+  title="scrnsvr"
+  description="Your screen, restored. Generative art for attention, stillness, and presence."
+>
+  <div id="page-two"></div>
+
+  <script is:inline src="/hearth.js"></script>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      startHypertorus();
+    });
+  </script>
+</Base>

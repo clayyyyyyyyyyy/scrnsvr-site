@@ -26,22 +26,18 @@ import Base from '../layouts/Base.astro';
     </svg>
   </div>
 
-  <div class="page-two" id="page-two"></div>
+  <script is:inline src="/main.js"></script>
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', function() {
       var logo = document.getElementById('logo');
       var overlay = document.querySelector('.logo-overlay');
       var circle = document.getElementById('circle');
-      var pageTwo = document.getElementById('page-two');
       var zoomed = false;
 
       function triggerZoom() {
         if (zoomed) return;
         zoomed = true;
-
-        // Start the sketch immediately so it's warmed up
-        startHypertorus();
 
         var circleRect = circle.getBoundingClientRect();
         var cx = circleRect.left + circleRect.width / 2;
@@ -58,31 +54,9 @@ import Base from '../layouts/Base.astro';
         overlay.style.transform = 'scale(' + scale + ')';
 
         setTimeout(function() {
-          pageTwo.classList.add('visible');
-          noLoop(); // Pause cloud shader
-          history.pushState(null, '', '/about');
+          window.location.href = '/about';
         }, 1400);
       }
-
-      function reverseZoom() {
-        if (!zoomed) return;
-
-        // Hide the sketch
-        pageTwo.classList.remove('visible');
-        shaderTime = 0;
-        loop();
-
-        // After the fade-out, reverse the zoom
-        setTimeout(function() {
-          stopHypertorus();
-          overlay.style.transform = 'scale(1)';
-          zoomed = false;
-        }, 500);
-      }
-
-      window.addEventListener('popstate', function() {
-        reverseZoom();
-      });
 
       logo.addEventListener('click', function(e) {
         e.stopPropagation();

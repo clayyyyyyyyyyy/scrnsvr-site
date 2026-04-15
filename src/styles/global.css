@@ -50,27 +50,18 @@ main canvas {
   cursor: pointer;
 }
 
-.page-two {
+#page-two {
   position: fixed;
   inset: 0;
   background: #000;
-  z-index: 2;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s ease;
 }
 
-.page-two canvas {
+#page-two canvas {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw !important;
   height: 100vh !important;
-}
-
-.page-two.visible {
-  opacity: 1;
-  pointer-events: auto;
 }
 
 @keyframes fadeIn {
