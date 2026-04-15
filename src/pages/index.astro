@@ -75,7 +75,13 @@ import Base from '../layouts/Base.astro';
       // Handle both fresh load and bfcache restore
       reverseZoom();
       window.addEventListener('pageshow', function(e) {
-        if (e.persisted) reverseZoom();
+        if (e.persisted) {
+          // Reset overlay transition so forward zoom can animate again
+          overlay.style.transition = '';
+          overlay.style.transform = '';
+          overlay.style.transformOrigin = '';
+          reverseZoom();
+        }
       });
 
       function triggerZoom() {
