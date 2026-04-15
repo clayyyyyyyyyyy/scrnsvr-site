@@ -51,9 +51,10 @@ import Base from '../layouts/Base.astro';
         };
       }
 
-      // If returning from about page, start zoomed in and reverse
-      if (sessionStorage.getItem('returnFromAbout')) {
+      function reverseZoom() {
+        if (!sessionStorage.getItem('returnFromAbout')) return;
         sessionStorage.removeItem('returnFromAbout');
+
         var params = getZoomParams();
 
         // Start zoomed in with no transition and no fade-in
@@ -67,7 +68,14 @@ import Base from '../layouts/Base.astro';
         overlay.offsetHeight;
         overlay.style.transition = '';
         overlay.style.transform = 'scale(1)';
+        zoomed = false;
       }
+
+      // Handle both fresh load and bfcache restore
+      reverseZoom();
+      window.addEventListener('pageshow', function(e) {
+        if (e.persisted) reverseZoom();
+      });
 
       function triggerZoom() {
         if (zoomed) return;
