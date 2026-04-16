@@ -314,8 +314,9 @@ function draw() {
 }
 
 function mousePressed(e) {
-  if (e && e.target && e.target.closest('#logo')) return;
+  if (e && e.target && e.target.closest('#logo, #logo-night')) return;
   isNight = !isNight;
+  window.dispatchEvent(new CustomEvent('nightToggle', { detail: { isNight: isNight } }));
 }
 
 function touchStarted() {
@@ -342,8 +343,9 @@ function touchMoved() {
 function touchEnded(e) {
   const dt = millis() - touchStartTime;
   if (!didTouchMove && dt < TAP_TIME_THRESHOLD) {
-    if (e && e.target && e.target.closest('#logo')) return false;
+    if (e && e.target && e.target.closest('#logo, #logo-night')) return false;
     isNight = !isNight;
+    window.dispatchEvent(new CustomEvent('nightToggle', { detail: { isNight: isNight } }));
   }
   return false;
 }
