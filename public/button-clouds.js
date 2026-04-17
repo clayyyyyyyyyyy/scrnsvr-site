@@ -179,6 +179,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const h = Math.max(btn.clientHeight, 1);
       const canvas = p.createCanvas(w, h, p.WEBGL);
       canvas.parent(btn);
+      document.querySelectorAll('main').forEach(function(m) {
+        if (m.children.length === 0) m.remove();
+      });
       p.noStroke();
       cloudShader = p.createShader(vert, frag);
 
