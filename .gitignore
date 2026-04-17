@@ -11,6 +11,9 @@ node_modules
 dist
 .astro
 *.local
+.env
+.env.*
+!.env.example
 
 # Skills (installed via npx skills add)
 .agents/

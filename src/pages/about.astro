@@ -3,14 +3,87 @@ import Base from '../layouts/Base.astro';
 ---
 <Base
   title="scrnsvr"
-  description="Your screen, restored. Generative art for attention, stillness, and presence."
+  description="A cognitive defense system using generative art. Join the waitlist."
 >
-  <div id="page-two"></div>
+  <div id="page-two">
+    <div class="about-content">
+      <p class="about-text">
+        attention is the root of everything: love, knowledge, truth, care — consciousness itself. and it&rsquo;s being strip-mined for profit.
+      </p>
+      <p class="about-text">
+        scrnsvr is a cognitive defense system using generative art to intervene at the threshold of compulsion and restores what extractive media environments are built to consume.
+      </p>
+      <form id="waitlist-form" class="waitlist-form" novalidate>
+        <input type="email" name="email" placeholder="email" required autocomplete="email" inputmode="email" />
+        <input type="tel" name="phone" placeholder="phone" required autocomplete="tel" inputmode="tel" />
+        <button type="submit">join the waitlist</button>
+        <p id="waitlist-status" class="waitlist-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
 
-  <script is:inline src="/hearth.js"></script>
-  <script is:inline>
+  <script>
+    import { supabase } from '../lib/supabase';
+
     document.addEventListener('DOMContentLoaded', function() {
-      startHypertorus();
+      const pageTwo = document.getElementById('page-two')!;
+
+      // Fade out before navigating away (back button or link)
+      window.addEventListener('pagehide', function() {
+        pageTwo.style.animation = 'none';
+        pageTwo.style.transition = 'opacity 0.4s ease-out';
+        pageTwo.style.opacity = '0';
+      });
+
+      // Re-trigger fade-in when restored from bfcache
+      window.addEventListener('pageshow', function(e) {
+        if (e.persisted) {
+          pageTwo.style.animation = 'none';
+          pageTwo.style.opacity = '0';
+          void pageTwo.offsetHeight;
+          pageTwo.style.transition = 'opacity 1.2s ease-out';
+          pageTwo.style.opacity = '1';
+        }
+      });
+
+      const form = document.getElementById('waitlist-form') as HTMLFormElement;
+      const status = document.getElementById('waitlist-status')!;
+      const submit = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+      function setStatus(text: string, kind: 'idle' | 'error' | 'success') {
+        status.textContent = text;
+        status.className = 'waitlist-status' + (kind === 'error' ? ' waitlist-status--error' : kind === 'success' ? ' waitlist-status--success' : '');
+      }
+
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const data = new FormData(form);
+        const email = String(data.get('email') || '').trim();
+        const phone = String(data.get('phone') || '').trim();
+
+        if (!email || !phone) {
+          setStatus('please fill in both fields.', 'error');
+          return;
+        }
+        if (!supabase) {
+          setStatus('waitlist is not configured yet.', 'error');
+          return;
+        }
+
+        submit.disabled = true;
+        setStatus('submitting…', 'idle');
+
+        const { error } = await supabase.from('waitlist').insert({ email, phone });
+
+        submit.disabled = false;
+        if (error) {
+          setStatus('something went wrong. try again.', 'error');
+          return;
+        }
+
+        form.reset();
+        setStatus('you\u2019re on the list. we\u2019ll be in touch.', 'success');
+      });
     });
   </script>
 </Base>

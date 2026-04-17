@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Alte Haas Grotesk';
+  src: url('/AlteHaasGroteskRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Alte Haas Grotesk';
+  src: url('/AlteHaasGroteskBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -56,14 +72,100 @@ main canvas {
   background: #000;
   opacity: 0;
   animation: fadeIn 1.2s ease-out 0.3s forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 6vh, 64px) clamp(20px, 5vw, 48px);
+  overflow-y: auto;
 }
 
-#page-two canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw !important;
-  height: 100vh !important;
+.about-content {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3.5vh, 36px);
+  color: #f2ede2;
+  font-family: 'Alte Haas Grotesk', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.about-text {
+  font-size: clamp(15px, 1.1vw + 11px, 18px);
+  line-height: 1.55;
+  letter-spacing: 0.005em;
+}
+
+.waitlist-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 360px;
+  margin-top: clamp(8px, 1.5vh, 16px);
+}
+
+.waitlist-form input {
+  background: transparent;
+  border: 1px solid rgba(242, 237, 226, 0.22);
+  border-radius: 2px;
+  color: #f2ede2;
+  font: inherit;
+  font-size: 15px;
+  padding: 11px 13px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.waitlist-form input::placeholder {
+  color: rgba(242, 237, 226, 0.38);
+}
+
+.waitlist-form input:focus {
+  border-color: rgba(251, 218, 84, 0.6);
+}
+
+.waitlist-form button {
+  margin-top: 4px;
+  background: #fbda54;
+  border: none;
+  border-radius: 2px;
+  color: #000;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 11px 13px;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+.waitlist-form button:hover {
+  filter: brightness(1.08);
+}
+
+.waitlist-form button:active {
+  transform: scale(0.985);
+}
+
+.waitlist-form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.waitlist-status {
+  min-height: 1.2em;
+  font-size: 13px;
+  color: rgba(242, 237, 226, 0.55);
+  text-align: left;
+  padding-top: 2px;
+}
+
+.waitlist-status--error {
+  color: #f08a8a;
+}
+
+.waitlist-status--success {
+  color: #cfe4a8;
 }
 
 @keyframes fadeIn {
