@@ -74,6 +74,23 @@ main canvas {
   pointer-events: auto;
 }
 
+/* Sharp 2D copy of the WebGL canvas, full viewport. iOS Safari can't reliably
+   resolve mix-blend-mode against a WebGL compositor layer, so the hero's
+   difference blend needs a 2D canvas below it to sample. Must stay below the
+   blurred mirror in document order so the pill blur still wins on top. */
+#eigenfield-mirror-sharp {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+  opacity: 0;
+}
+
+#eigenfield-mirror-sharp.is-ready {
+  opacity: 1;
+}
+
 /* Blurred mirror of the WebGL canvas. Visible only inside the pill silhouettes
    via clip-path (set from JS). Sits above the sharp canvas, below text. */
 #eigenfield-mirror {

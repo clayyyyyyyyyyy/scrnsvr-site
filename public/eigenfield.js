@@ -500,9 +500,14 @@
   // reveals the mirror only inside the pill silhouettes.
   function startPillMirror() {
     var mirror = document.getElementById('eigenfield-mirror');
+    var mirrorSharp = document.getElementById('eigenfield-mirror-sharp');
     if (!mirror) return function () {};
     var mctx = mirror.getContext('2d');
+    var mctxSharp = mirrorSharp ? mirrorSharp.getContext('2d') : null;
     var SCALE = 0.4;
+    // Full-res copy so mix-blend-mode siblings (e.g. .about-hero) blend against
+    // a crisp 2D backdrop on iOS instead of the WebGL layer they can't sample.
+    var SCALE_SHARP = 1;
     var running = true;
     var clipDirty = true;
 
@@ -513,6 +518,14 @@
       if (mirror.height !== h) mirror.height = h;
       mirror.style.width = window.innerWidth + 'px';
       mirror.style.height = window.innerHeight + 'px';
+      if (mirrorSharp) {
+        var ws = Math.max(2, Math.floor(window.innerWidth * SCALE_SHARP));
+        var hs = Math.max(2, Math.floor(window.innerHeight * SCALE_SHARP));
+        if (mirrorSharp.width !== ws) mirrorSharp.width = ws;
+        if (mirrorSharp.height !== hs) mirrorSharp.height = hs;
+        mirrorSharp.style.width = window.innerWidth + 'px';
+        mirrorSharp.style.height = window.innerHeight + 'px';
+      }
     }
 
     function buildClipPath() {
@@ -572,6 +585,10 @@
           try {
             mctx.drawImage(cnv, 0, 0, mirror.width, mirror.height);
             if (!mirror.classList.contains('is-ready')) mirror.classList.add('is-ready');
+            if (mctxSharp) {
+              mctxSharp.drawImage(cnv, 0, 0, mirrorSharp.width, mirrorSharp.height);
+              if (!mirrorSharp.classList.contains('is-ready')) mirrorSharp.classList.add('is-ready');
+            }
           } catch (e) { /* canvas not ready */ }
           lastDraw = t;
         }
