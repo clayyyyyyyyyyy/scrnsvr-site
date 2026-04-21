@@ -276,6 +276,12 @@
         p.setAttributes({ preserveDrawingBuffer: true, antialias: true });
         var cnv = p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
         cnv.parent('eigenfield-bg');
+        // p5 instance mode inserts a default <main> wrapper in <body> that we
+        // no longer need once the canvas is reparented. Leaving it in place
+        // covers the viewport (per main { position: fixed; width: 100vw }) and
+        // swallows clicks on form inputs below.
+        var orphanMain = document.querySelector('body > main:empty');
+        if (orphanMain) orphanMain.remove();
         p.pixelDensity(Math.min(2, window.devicePixelRatio || 1));
         p.rectMode(p.CENTER);
         p.noStroke();
