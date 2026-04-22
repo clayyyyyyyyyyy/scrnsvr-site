@@ -272,9 +272,22 @@
         '}'
       ].join('\n');
 
+      // Use the document's client dimensions (which respect 100lvh on html)
+      // instead of window.innerWidth/Height — on iOS those return only the
+      // visual viewport between URL bar and home indicator, leaving black
+      // bars where the canvas doesn't reach behind the chrome.
+      function viewportSize() {
+        var de = document.documentElement;
+        return {
+          w: Math.max(de.clientWidth, window.innerWidth || 0),
+          h: Math.max(de.clientHeight, window.innerHeight || 0)
+        };
+      }
+
       p.setup = function () {
         p.setAttributes({ preserveDrawingBuffer: true, antialias: true });
-        var cnv = p.createCanvas(p.windowWidth, p.windowHeight, p.WEBGL);
+        var vp = viewportSize();
+        var cnv = p.createCanvas(vp.w, vp.h, p.WEBGL);
         cnv.parent('eigenfield-bg');
         // p5 instance mode inserts a default <main> wrapper in <body> that we
         // no longer need once the canvas is reparented. Leaving it in place
@@ -442,7 +455,8 @@
       };
       p.touchEnded = function () {};
       p.windowResized = function () {
-        p.resizeCanvas(p.windowWidth, p.windowHeight);
+        var vp = viewportSize();
+        p.resizeCanvas(vp.w, vp.h);
         measureMask();
       };
     });

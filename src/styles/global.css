@@ -22,7 +22,8 @@
 
 html, body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  height: 100lvh;
   overflow: hidden;
   background: #000;
 }
@@ -34,6 +35,8 @@ main {
   left: 0;
   width: 100vw !important;
   height: 100vh !important;
+  width: 100lvw !important;
+  height: 100lvh !important;
 }
 
 main canvas {
@@ -43,6 +46,8 @@ main canvas {
   left: 0;
   width: 100vw !important;
   height: 100vh !important;
+  width: 100lvw !important;
+  height: 100lvh !important;
 }
 
 .logo-overlay {
@@ -98,6 +103,8 @@ main canvas {
   inset: 0;
   width: 100vw !important;
   height: 100vh !important;
+  width: 100lvw !important;
+  height: 100lvh !important;
 }
 
 #page-two {
@@ -110,7 +117,13 @@ main canvas {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(28px, 5vh, 56px) clamp(20px, 5vw, 48px);
+  /* Inflate the padding by iOS's safe-area insets so that, with the canvas
+     extending behind the URL bar / home indicator (viewport-fit=cover), the
+     content stays inside the visible window. */
+  padding-top: max(clamp(28px, 5vh, 56px), env(safe-area-inset-top));
+  padding-right: max(clamp(20px, 5vw, 48px), env(safe-area-inset-right));
+  padding-bottom: max(clamp(28px, 5vh, 56px), env(safe-area-inset-bottom));
+  padding-left: max(clamp(20px, 5vw, 48px), env(safe-area-inset-left));
   overflow-y: auto;
   pointer-events: none;
 }
