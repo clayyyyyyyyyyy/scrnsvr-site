@@ -134,7 +134,7 @@ main canvas {
 
 .about-content {
   width: 100%;
-  max-width: 560px;
+  max-width: min(96vw, 1200px);
   display: flex;
   flex-direction: column;
   align-items: center;

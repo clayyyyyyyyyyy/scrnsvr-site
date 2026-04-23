@@ -611,7 +611,9 @@
     var boxW = 0, boxH = 0, paintedH = 0;
 
     function wrapText(raw, maxWidth) {
-      var words = raw.split(/\s+/);
+      // Split on regular spaces only — preserve non-breaking spaces inside
+      // words so the hero copy can pin its own line-break points.
+      var words = raw.split(' ');
       var wrapped = [];
       var current = '';
       for (var i = 0; i < words.length; i++) {
