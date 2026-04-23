@@ -107,9 +107,14 @@ import Base from '../layouts/Base.astro';
         };
         hero.addEventListener('herotypingcomplete', () => {
           emailField.classList.add('is-visible');
-          phoneField.classList.add('is-visible');
-          submitBtn.classList.add('is-visible');
           markClipDirty();
+          onOpacityEnd(emailField, () => {
+            phoneField.classList.add('is-visible');
+            markClipDirty();
+            onOpacityEnd(phoneField, () => {
+              submitBtn.classList.add('is-visible');
+            });
+          });
         }, { once: true });
       }
 
