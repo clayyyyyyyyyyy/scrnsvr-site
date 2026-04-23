@@ -172,14 +172,15 @@ main canvas {
 /* Hero copy as two-line display type. iOS WebKit breaks mix-blend-mode once it
    promotes canvas layers to GPU compositing (~1s in), so the inverted-against-
    art effect is painted by .about-hero-canvas instead of CSS mix-blend-mode.
-   The HTML text stays for accessibility and layout, kept visible as a white
-   fallback until JS flips it transparent once the canvas is drawing. */
+   The HTML text stays for accessibility and layout; it's transparent so the
+   canvas owns all visible painting — keeping it white caused a flash of the
+   static copy during navigation before JS could hand off to the canvas. */
 .about-hero {
   position: relative;
-  color: #ffffff;
+  color: transparent;
   font-family: 'Alte Haas Grotesk', system-ui, sans-serif;
   font-weight: 700;
-  font-size: clamp(34px, 2.5vw + 18px, 54px);
+  font-size: clamp(22px, 3.2vw + 10px, 44px);
   line-height: 1.06;
   letter-spacing: -0.012em;
   text-align: center;
