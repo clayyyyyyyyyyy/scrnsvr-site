@@ -527,8 +527,8 @@
       nodes.forEach(function (el) {
         var r = el.getBoundingClientRect();
         if (r.width <= 1 || r.height <= 1) return;
-        // Skip empty text containers (e.g. the pre-submit waitlist-status).
-        if (el.tagName === 'P' && !el.textContent.trim()) return;
+        // Status line has no visible pill — don't punch a mirror hole behind it.
+        if (el.id === 'waitlist-status') return;
         var rr = Math.min(20, r.height * 0.5, r.width * 0.5);
         var x = r.left, y = r.top, w = r.width, h = r.height;
         parts.push(

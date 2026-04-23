@@ -323,17 +323,11 @@ main canvas {
 }
 
 .waitlist-status {
-  min-height: 1.2em;
+  height: 1.6em;
   font-size: 13px;
+  line-height: 1.6;
   color: rgba(242, 237, 226, 0.55);
   text-align: center;
-  padding-top: 2px;
-  border-radius: 999px;
-}
-
-.waitlist-status:not(:empty) {
-  padding: 6px 14px;
-  background: rgba(12, 8, 4, 0.18);
 }
 
 .waitlist-status--error {
