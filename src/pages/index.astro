@@ -58,9 +58,9 @@ import Base from '../layouts/Base.astro';
 
         var params = JSON.parse(stored);
 
-        // Start zoomed in with no transition and no fade-in
+        // Start zoomed in with no transition and no fade-in (keep pulse)
         overlay.style.transition = 'none';
-        logo.style.animation = 'none';
+        logo.style.animation = 'pulse 3.6s ease-in-out infinite';
         logo.style.opacity = '1';
         overlay.style.transformOrigin = params.cx + 'px ' + params.cy + 'px';
         overlay.style.transform = 'scale(' + params.scale + ')';

@@ -57,13 +57,53 @@ main canvas {
   will-change: transform;
 }
 
+.logo-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: calc(min(100vw, 100vh) / 1.6);
+  height: calc(min(100vw, 100vh) / 1.6);
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    #ff3b6b,
+    #ffb347,
+    #fff26b,
+    #6bff9c,
+    #6bd6ff,
+    #a36bff,
+    #ff6bdc,
+    #ff3b6b
+  );
+  filter: blur(70px) saturate(1.4);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, opacity;
+  animation:
+    shimmer-fade 1.6s ease-out 0.4s forwards,
+    shimmer-glow 8s ease-in-out 2s infinite;
+}
+
 .logo-overlay svg {
+  position: relative;
+  z-index: 1;
   height: calc(min(100vw, 100vh) / 2);
   width: auto;
   opacity: 0;
-  animation: fadeIn 1.2s ease-out 0.4s forwards;
+  animation: fadeIn 1.2s ease-out 0.4s forwards, pulse 3.6s ease-in-out infinite;
   pointer-events: auto;
   cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-overlay svg {
+    animation: fadeIn 1.2s ease-out 0.4s forwards;
+  }
+  .logo-overlay::before {
+    animation: shimmer-fade 1.6s ease-out 0.4s forwards;
+  }
 }
 
 #eigenfield-bg {
@@ -366,4 +406,19 @@ main canvas {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.025); }
+}
+
+@keyframes shimmer-fade {
+  to { opacity: 0.55; }
+}
+
+@keyframes shimmer-glow {
+  0%   { transform: rotate(0deg)   scale(1);    opacity: 0.55; }
+  50%  { transform: rotate(180deg) scale(1.06); opacity: 0.8;  }
+  100% { transform: rotate(360deg) scale(1);    opacity: 0.55; }
 }
